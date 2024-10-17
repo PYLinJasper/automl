@@ -187,12 +187,12 @@ def create_tf_example(image,
     if include_masks:
       feature_dict['image/object/mask'] = (
           tfrecord_util.bytes_list_feature(encoded_mask_png))
-  if caption_annotations:
-    captions = []
-    for caption_annotation in caption_annotations:
-      captions.append(caption_annotation['caption'].encode('utf8'))
-    feature_dict.update(
-        {'image/caption': tfrecord_util.bytes_list_feature(captions)})
+  # if caption_annotations:
+  #   captions = []
+  #   for caption_annotation in caption_annotations:
+  #     captions.append(caption_annotation['caption'].encode('utf8'))
+  #   feature_dict.update(
+  #       {'image/caption': tfrecord_util.bytes_list_feature(captions)})
 
   example = tf.train.Example(features=tf.train.Features(feature=feature_dict))
   return key, example, num_annotations_skipped
@@ -295,9 +295,9 @@ def _create_tf_record_from_coco_annotations(image_info_file,
   if object_annotations_file:
     img_to_obj_annotation, category_index = (
         _load_object_annotations(object_annotations_file))
-  if caption_annotations_file:
-    img_to_caption_annotation = (
-        _load_caption_annotations(caption_annotations_file))
+  # if caption_annotations_file:
+  #   img_to_caption_annotation = (
+  #       _load_caption_annotations(caption_annotations_file))
 
   def _get_object_annotation(image_id):
     if img_to_obj_annotation:
