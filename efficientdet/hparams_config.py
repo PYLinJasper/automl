@@ -172,13 +172,13 @@ def default_detection_configs():
   h = Config()
 
   # model name.
-  h.name = 'efficientdet-d1'
+  h.name = 'efficientdet-d0'
 
   # activation type: see activation_fn in utils.py.
   h.act_type = 'swish'
 
   # input preprocessing parameters
-  h.image_size = 640  # An integer or a string WxH such as 640x320.
+  h.image_size = 64  # An integer or a string WxH such as 640x320.
   h.target_size = None
   h.input_rand_hflip = True
   h.jitter_min = 0.1
@@ -190,13 +190,13 @@ def default_detection_configs():
 
   # dataset specific parameters
   # TODO(tanmingxing): update this to be 91 for COCO, and 21 for pascal.
-  h.num_classes = 90  # 1+ actual classes, 0 is reserved for background.
+  h.num_classes = 1  # 1+ actual classes, 0 is reserved for background.
   h.seg_num_classes = 3  # segmentation classes
   h.heads = ['object_detection']  # 'object_detection', 'segmentation'
 
   h.skip_crowd_during_training = True
   h.label_map = None  # a dict or a string of 'coco', 'voc', 'waymo'.
-  h.max_instances_per_image = 100  # Default to 100 for COCO.
+  h.max_instances_per_image = 10  # Default to 100 for COCO.
   h.regenerate_source_id = False
 
   # model architecture
@@ -205,20 +205,20 @@ def default_detection_configs():
   h.num_scales = 3
   # ratio w/h: 2.0 means w=1.4, h=0.7. Can be computed with k-mean per dataset.
   h.aspect_ratios = [1.0, 2.0, 0.5]  # [[0.7, 1.4], [1.0, 1.0], [1.4, 0.7]]
-  h.anchor_scale = 4.0
+  h.anchor_scale = 2.0
   # is batchnorm training mode
   h.is_training_bn = True
   # optimization
   h.momentum = 0.9
   h.optimizer = 'sgd'  # can be 'adam' or 'sgd'.
-  h.learning_rate = 0.08  # 0.008 for adam.
+  h.learning_rate = 0.001  # 0.008 for adam.
   h.lr_warmup_init = 0.008  # 0.0008 for adam.
   h.lr_warmup_epoch = 1.0
   h.first_lr_drop_epoch = 200.0
   h.second_lr_drop_epoch = 250.0
   h.poly_lr_power = 0.9
   h.clip_gradients_norm = 10.0
-  h.num_epochs = 300
+  h.num_epochs = 25
   h.data_format = 'channels_last'
   # The default image normalization is identical to Cloud TPU ResNet.
   h.mean_rgb = [0.485 * 255, 0.456 * 255, 0.406 * 255]
@@ -303,7 +303,7 @@ efficientdet_model_param_dict = {
         dict(
             name='efficientdet-d0',
             backbone_name='efficientnet-b0',
-            image_size=512,
+            image_size=64,
             fpn_num_filters=64,
             fpn_cell_repeats=3,
             box_class_repeats=3,
