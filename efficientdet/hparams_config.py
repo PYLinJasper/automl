@@ -178,7 +178,7 @@ def default_detection_configs():
   h.act_type = 'swish'
 
   # input preprocessing parameters
-  h.image_size = 128  # An integer or a string WxH such as 640x320.
+  h.image_size = 512  # An integer or a string WxH such as 640x320.
   h.target_size = None
   h.input_rand_hflip = True
   h.jitter_min = 0.1
@@ -196,7 +196,7 @@ def default_detection_configs():
 
   h.skip_crowd_during_training = True
   h.label_map = None  # a dict or a string of 'coco', 'voc', 'waymo'.
-  h.max_instances_per_image = 3  # Default to 100 for COCO.
+  h.max_instances_per_image = 5  # Default to 100 for COCO.
   h.regenerate_source_id = False
 
   # model architecture
@@ -303,7 +303,7 @@ efficientdet_model_param_dict = {
         dict(
             name='efficientdet-d0',
             backbone_name='efficientnet-b0',
-            image_size=128,
+            image_size=512,
             fpn_num_filters=64,
             fpn_cell_repeats=3,
             box_class_repeats=3,
