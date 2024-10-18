@@ -196,7 +196,7 @@ def default_detection_configs():
 
   h.skip_crowd_during_training = True
   h.label_map = None  # a dict or a string of 'coco', 'voc', 'waymo'.
-  h.max_instances_per_image = 8  # Default to 100 for COCO.
+  h.max_instances_per_image = 3  # Default to 100 for COCO.
   h.regenerate_source_id = False
 
   # model architecture
@@ -228,8 +228,8 @@ def default_detection_configs():
   # classification loss
   h.label_smoothing = 0.0  # 0.1 is a good default
   # Behold the focal loss parameters
-  h.alpha = 0.25
-  h.gamma = 3.5
+  h.alpha = 0.75
+  h.gamma = 4.0
 
   # localization loss
   h.delta = 0.1  # regularization parameter of huber loss.
