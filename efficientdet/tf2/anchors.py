@@ -24,7 +24,7 @@ from object_detection import faster_rcnn_box_coder
 from object_detection import region_similarity_calculator
 from object_detection import target_assigner
 
-MAX_DETECTION_POINTS = 100
+MAX_DETECTION_POINTS = 500
 
 
 def decode_box_outputs(pred_boxes, anchor_boxes):
