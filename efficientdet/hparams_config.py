@@ -196,7 +196,7 @@ def default_detection_configs():
 
   h.skip_crowd_during_training = True
   h.label_map = None  # a dict or a string of 'coco', 'voc', 'waymo'.
-  h.max_instances_per_image = 10  # Default to 100 for COCO.
+  h.max_instances_per_image = 8  # Default to 100 for COCO.
   h.regenerate_source_id = False
 
   # model architecture
@@ -204,16 +204,16 @@ def default_detection_configs():
   h.max_level = 7
   h.num_scales = 3
   # ratio w/h: 2.0 means w=1.4, h=0.7. Can be computed with k-mean per dataset.
-  h.aspect_ratios = [1.0, 2.0, 0.5]  # [[0.7, 1.4], [1.0, 1.0], [1.4, 0.7]]
-  h.anchor_scale = 2.0
+  h.aspect_ratios = [0.5, 1.0, 2.0]  # [[0.7, 1.4], [1.0, 1.0], [1.4, 0.7]]
+  h.anchor_scale = 1.5
   # is batchnorm training mode
   h.is_training_bn = True
   # optimization
   h.momentum = 0.9
-  h.optimizer = 'sgd'  # can be 'adam' or 'sgd'.
-  h.learning_rate = 0.001  # 0.008 for adam.
-  h.lr_warmup_init = 0.008  # 0.0008 for adam.
-  h.lr_warmup_epoch = 1.0
+  h.optimizer = 'adam'  # can be 'adam' or 'sgd'.
+  h.learning_rate = 0.0001  # 0.008 for adam.
+  h.lr_warmup_init = 0.00001  # 0.0008 for adam.
+  h.lr_warmup_epoch = 5.0
   h.first_lr_drop_epoch = 200.0
   h.second_lr_drop_epoch = 250.0
   h.poly_lr_power = 0.9
@@ -229,12 +229,12 @@ def default_detection_configs():
   h.label_smoothing = 0.0  # 0.1 is a good default
   # Behold the focal loss parameters
   h.alpha = 0.25
-  h.gamma = 1.5
+  h.gamma = 3.5
 
   # localization loss
   h.delta = 0.1  # regularization parameter of huber loss.
   # total loss = box_loss * box_loss_weight + iou_loss * iou_loss_weight
-  h.box_loss_weight = 50.0
+  h.box_loss_weight = 100.0
   h.iou_loss_type = None
   h.iou_loss_weight = 1.0
 
@@ -257,8 +257,8 @@ def default_detection_configs():
   # For post-processing nms, must be a dict.
   h.nms_configs = {
       'method': 'gaussian',
-      'iou_thresh': None,  # use the default value based on method.
-      'score_thresh': 0.,
+      'iou_thresh': 0.5,  # use the default value based on method.
+      'score_thresh': 0.05,
       'sigma': None,
       'pyfunc': False,
       'max_nms_inputs': 0,
@@ -404,11 +404,11 @@ efficientdet_lite_param_dict = {
         dict(
             name='efficientdet-lite0',
             backbone_name='efficientnet-lite0',
-            image_size=320,
+            image_size=64,
             fpn_num_filters=64,
             fpn_cell_repeats=3,
             box_class_repeats=3,
-            anchor_scale=3.0,
+            anchor_scale=1.5,
             **lite_common_param,
         ),
     'efficientdet-lite1':
