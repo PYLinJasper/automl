@@ -86,7 +86,6 @@ def topk_class_boxes(params, cls_outputs: T,
   num_classes = params['num_classes']
 
   max_nms_inputs = params['nms_configs'].get('max_nms_inputs', 0)
-  print(f'Here IS the {params['nms_configs']}!!!!!')
   if max_nms_inputs > 0:
     # Prune anchors and detections to only keep max_nms_inputs.
     # Due to some issues, top_k is currently slow in graph model.
