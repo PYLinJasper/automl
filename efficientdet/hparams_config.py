@@ -178,7 +178,7 @@ def default_detection_configs():
   h.act_type = 'swish'
 
   # input preprocessing parameters
-  h.image_size = 64  # An integer or a string WxH such as 640x320.
+  h.image_size = 128  # An integer or a string WxH such as 640x320.
   h.target_size = None
   h.input_rand_hflip = True
   h.jitter_min = 0.1
