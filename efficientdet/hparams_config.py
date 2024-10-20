@@ -205,13 +205,13 @@ def default_detection_configs():
   h.num_scales = 3
   # ratio w/h: 2.0 means w=1.4, h=0.7. Can be computed with k-mean per dataset.
   h.aspect_ratios = [0.75, 1.0, 1.5] #[0.5, 1.0, 2.0]  # [[0.7, 1.4], [1.0, 1.0], [1.4, 0.7]]
-  h.anchor_scale = 1.0
+  h.anchor_scale = 0.5
   # is batchnorm training mode
   h.is_training_bn = True
   # optimization
   h.momentum = 0.9
   h.optimizer = 'adam'  # can be 'adam' or 'sgd'.
-  h.learning_rate = 0.0002  # 0.008 for adam.
+  h.learning_rate = 0.001  # 0.008 for adam.
   h.lr_warmup_init = 0.00001  # 0.0008 for adam.
   h.lr_warmup_epoch = 5.0
   h.first_lr_drop_epoch = 200.0
@@ -234,7 +234,7 @@ def default_detection_configs():
   # localization loss
   h.delta = 0.1  # regularization parameter of huber loss.
   # total loss = box_loss * box_loss_weight + iou_loss * iou_loss_weight
-  h.box_loss_weight = 50.0
+  h.box_loss_weight = 75.0
   h.iou_loss_type = None
   h.iou_loss_weight = 1.0
 
